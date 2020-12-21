@@ -66,7 +66,7 @@ function constructPassword() {
 
   console.log("[Object]password.chars:" + passwordObject.chars);
   console.log("[Prompt]Char: Loop complete!");
-  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:N/A\nUpper:N/A\nNumbers:N/A");
+  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:N/A\nUpper:N/A\nNumbers:N/A\nSpecials:N/A");
   console.log("-----------------------");
 
 
@@ -95,7 +95,7 @@ function constructPassword() {
 
   console.log("[Confirm]Low: Loop complete!");
   console.log("-----------------------");
-  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:N/A\nNumbers:N/A");
+  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:N/A\nNumbers:N/A\nSpecials:N/A");
   console.log("-----------------------");
 
 
@@ -124,7 +124,7 @@ function constructPassword() {
 
   console.log("[Confirm]Up: Loop complete!");
   console.log("-----------------------");
-  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.lower + "\nNumbers:N/A");
+  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.lower + "\nNumbers:N/A\nSpecials:N/A");
   console.log("-----------------------");
 
 
@@ -154,7 +154,7 @@ function constructPassword() {
 
   console.log("[Confirm]Num: Loop complete!");
   console.log("-----------------------");
-  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.upper + "\nNumbers:" + passwordObject.numbers);
+  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.upper + "\nNumbers:" + passwordObject.numbers + "\nSpecials:N/A");
   console.log("-----------------------");
 
 
@@ -184,12 +184,8 @@ function constructPassword() {
   console.log("-----------------------");
   console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.upper + "\nNumbers:" + passwordObject.numbers + "\nSpecial:" + passwordObject.special);
   console.log("-----------------------");
-
-
-
-
-
-  passwordObject.typeSelected = 0 //Resetting this value for testing reasons due to entering the procedure anew each attempt; keep at the end, will need to reset the object at end
+  console.log("[Event]End constructPassword()");
+  // passwordObject.typeSelected = 0 //Resetting this value for testing reasons due to entering the procedure anew each attempt; keep at the end;
 }
 
 
