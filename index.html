@@ -1,34 +1,51 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta http-equiv="X-UA-Compatible" content="ie=edge" />
-    <title>Password Generator</title>
-    <link rel="stylesheet" href="./Assets/css/style.css" />
-  </head>
-  <body>
-    <div class="wrapper">
-      <header>
-        <h1>Password Generator</h1>
-      </header>
-      <div class="card">
-        <div class="card-header">
-          <h2>Generate a Password</h2>
-        </div>
-        <div class="card-body">
-          <textarea
-            readonly
-            id="password"
-            placeholder="Your Secure Password"
-            aria-label="Generated Password"
-          ></textarea>
-        </div>
-        <div class="card-footer">
-          <button id="generate" class="btn">Generate Password</button>
-        </div>
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+
+  <!-- CSS Link -->
+  <link rel="stylesheet" href="./Assets/css/style.css" />
+
+  <!-- Title -->
+  <title>Password Generator</title>
+</head>
+
+<body>
+  <div class="wrapper">
+
+    <!-- Page Header -->
+    <header>
+      <h1>Password Generator</h1>
+    </header>
+
+    <!-- Card -->
+    <div class="card" id="test">
+
+      <!-- Card Header -->
+      <div class="card-header">
+        <h2>Generate a Password</h2>
       </div>
+
+      <!-- Card Body -->
+      <div class="card-body">
+        <textarea readonly id="password" placeholder="Click Generate Pasword..." aria-label="Generated Password"></textarea>
+      </div>
+
+      <!-- GENERATE BUTTON -->
+      <div class="card-footer">
+        <button id="generate" class="btn">Generate Password</button>
+      </div>
+
     </div>
-    <script src="script.js"></script>
-  </body>
+  </div>
+  
+  <!-- Main Script -->
+  <script src="./Assets/js/script.js"></script>
+  <!-- Test (sandbox) script -->
+  <script src="./Assets/js/test.js"></script>
+</body>
+
 </html>

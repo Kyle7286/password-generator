@@ -16,7 +16,9 @@ The purpose of this webpage is to utilize javascript and create a password gener
 
 ## Takeaways 🥡
 --- 
-* Coming soon...
+* Learned the value of psuedo code to plan out the logic
+* Gained confidence in use of objects and the efficiency of dot notation
+* Learned out to escape special vs characters to see them as their actual character instead of a inherit function
 
 ## Screenshot 📊
 ---
