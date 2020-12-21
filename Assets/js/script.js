@@ -34,7 +34,8 @@ var passwordObject = {
 // password construct function which captures user input and modifies the passwordObject properties for later use;
 function constructPassword() {
   console.log("[Event]Running constructPassword()");
-  //  Character prompt - Loop the prompt until expected input is received, then proceed with function
+
+  //START:  Character prompt - Loop the prompt until expected input is received, then proceed with function
   var promptChar;
   while (true) {
     console.log("[Prompt]Char: User Prompted");
@@ -61,46 +62,46 @@ function constructPassword() {
       console.log("[Prompt]Char: User input did not meet requested parameters");
       continue;
     }
-  } // Character prompt
+  } //END: Character prompt
+
   console.log("[Object]password.chars:" + passwordObject.chars);
   console.log("[Prompt]Char: Loop complete!");
   console.log("-----------------------");
 
-
-  //  Numbers prompt - Loop the prompt until expected input is received, then proceed with function
+  //START: Numbers prompt - Loop the prompt until expected input is received, then proceed with function
   var promptNum;
-  while (true) {
-    console.log("[Prompt]Num: User Prompted");
-    var promptChar = prompt("How many characters long?\n(Min 8, Max 128)");
-    console.log("[Prompt]Num: User input=" + promptChar);
-    // If user input is blank or empty, reloop again until proper input
-    if (promptChar == "") {
-      console.log("[Prompt]Num: User entered no input; relooping");
-      continue;
-    }
-    // If user input is a number (true) & between 8-128
-    else if (Number.isInteger(parseInt(promptChar)) && promptChar >= 8 && promptChar <= 128) {
-      passwordObject.chars = promptChar //Update the password property with input
-      console.log("[Prompt]Num: User Input accepted; proceeding");
+  while (!promptNum) {
+    console.log("[Confirm]Num: User Prompted");
+    var promptNum = confirm("Would you like to include any numbers?");
+    console.log("[Confirm]Num: User input=" + promptNum);
+    // If user input is true
+    if (promptNum) {
+      passwordObject.numbers = 1; //Update the password.numbers with input
+      passwordObject.typeSelected = 1;
+      console.log("[Confirm]Num: User Input accepted; proceeding");
       break; //proceed onward
     }
-    // If canceled out; exit function b/c this is mandatory
-    else if (!promptChar) {
-      console.log("[Prompt]Num: User canceled");
-      alert("Alert!\n\nCharacter length is required!\nTo continue with the password generator process, please start over and enter a value.")
-      return 0; // exit parent function
-    }
+    // If canceled, record data and proceed with function
     else {
-      console.log("[Prompt]Num: User input did not meet requested parameters");
-      continue;
+      console.log("[Confirm]Num: User canceled");
+      passwordObject.numbers = 0
+      break; // proceed with function
     }
-  } // Character prompt
-  console.log("[Object]password.chars:" + passwordObject.chars);
-  console.log("[Prompt]Num: Loop complete!");
+  } //END: Numbers prompt
+
+  console.log("[Object]password.numbers:" + passwordObject.numbers);
+  console.log("[Object]password.typeSelected:" + passwordObject.typeSelected);
+  console.log("[Confirm]Num: Loop complete!");
   console.log("-----------------------");
 
 
 
+
+
+
+
+
+passwordObject.typeSelected = 0 //Resetting this value for testing reasons due to entering the procedure anew each attempt; keep at the end, will need to reset the object at end
 }
 
 
