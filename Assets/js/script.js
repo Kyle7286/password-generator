@@ -31,10 +31,16 @@ var passwordObject = {
 
 
 
-// password construct function which captures user input and modifies the passwordObject properties for later use;
+//* MAIN FUNCTION: Calls the smaller functions to construct the password;
 function constructPassword() {
   console.log("[Event]Running constructPassword()");
+  promptUser();
+  buildPassword();
+}
+// */
 
+//* SUB FUNCTION: contains all the prompt logic and modifies the password object with the results
+function promptUser() {
   //START:  Character prompt - Loop the prompt until expected input is received, then proceed with function
   var promptChar;
   while (true) {
@@ -56,7 +62,7 @@ function constructPassword() {
     else if (!promptChar) {
       console.log("[Prompt]Char: User canceled");
       alert("Alert!\n\nCharacter length is required!\nTo continue with the password generator process, please start over and enter a value.")
-      return 0; // exit parent function
+      return -1; // exit parent function
     }
     else {
       console.log("[Prompt]Char: User input did not meet requested parameters");
@@ -187,10 +193,14 @@ function constructPassword() {
   console.log("[Event]End constructPassword()");
   // passwordObject.typeSelected = 0 //Resetting this value for testing reasons due to entering the procedure anew each attempt; keep at the end;
 }
+// */
+
+//*
+function buildPassword() {
+  console.log("[Event]Running buildPassword()");
+  
 
 
-
-
-
-
+}
+// */
 
