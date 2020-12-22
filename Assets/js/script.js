@@ -15,7 +15,7 @@ function generatePassword() {
   txtBox.innerHTML = finalPassword;
 }
 
-// Init Password object
+// Init Password object to hold values during construction
 var passwordObject = {
   chars: 0,
   number: 0,
@@ -33,14 +33,13 @@ var passwordObject = {
 
 //* MAIN FUNCTION: Calls the smaller functions to construct the password;
 function constructPassword() {
+  
   console.log("[Event]Running constructPassword()");
 
-  
-
-  // // wipe object property values memory clean for creating a new password
-  // passwordObject.arrayTypeSelections = [];
-  // passwordObject.typeUsed = "";
-  // passwordObject.string = "";
+  // wipe object property values memory clean for creating a new password
+  passwordObject.arrayTypeSelections = [];
+  passwordObject.typeUsed = "";
+  passwordObject.string = "";
 
   promptUser();
   return buildPassword();
@@ -301,6 +300,10 @@ function buildPassword() {
 
   // call type validator
   typeValidator();
+
+  console.log(passwordObject);
+
+  // return the final string
   return passwordObject.string;
 }
 // */
