@@ -12,9 +12,11 @@ body,
   padding: 0;
 }
 
+/* change bg black for night time coding */
 body {
   font-family: sans-serif;
-  background-color: #f9fbfd;
+  /* background-color: #f9fbfd; */
+  background-color: black;
 }
 
 .wrapper {

@@ -6,14 +6,14 @@ let txtBox = document.getElementById("password");
 // On button click, run generatePassword() fuction;
 btnGenerate.addEventListener("click", generatePassword);
 
-// Master function; triggered by button click
+// Master function; triggered by button click; keep it simple here
 function generatePassword() {
   console.log("[Event]Generate Password button pressed");
   console.log("[Event]Running generatePassword()");
+  
+  
   // Assign final password to variable;
   let finalPassword = constructPassword();
-
-
 }
 
 // Init Password object
@@ -195,10 +195,19 @@ function promptUser() {
 }
 // */
 
-//*
+//* go thru the password building process
 function buildPassword() {
   console.log("[Event]Running buildPassword()");
-  
+
+  // main loop; loop total chars long, for each character slot -> random type -> random char -> random case style
+  for (let i = 0; i < passwordObject.chars; i ++) {
+      
+      
+      
+
+
+
+  }
 
 
 }
