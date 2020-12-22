@@ -1,8 +1,18 @@
 # Outline/Notes
-        Button clicked
-        calls password function
-    function captureResponse - Only assigns prompts to a variable
-        How many chars?
+
+### Basic High-Level
+1. Button clicked
+2. Call Constructer (Architect)
+    1. Call Prompter
+    2. Call Builder
+        * Validate password
+
+ 
+    
+### function promptUser()
+* Only assigns prompts to a variable
+* How many chars?
+* 
 
         function constructPassword - Takes variables from capture and runs logic to create the password
             totalchars (for loop)
@@ -14,18 +24,18 @@
                     special (random 32)
 
 
-    CHARACTER INPUT (MANDATORY)
-        While (True) {
-            chars = parseINt(prompt())
-            if (isInteger(chars) && chars >= 8 && chars <= 128) {
-                set object.chars = chars
-                break; //proceed onward
-            }
-            else if (!chars) {
-                return;
-            }
-
+CHARACTER INPUT (MANDATORY)
+    While (True) {
+        chars = parseINt(prompt())
+        if (isInteger(chars) && chars >= 8 && chars <= 128) {
+            set object.chars = chars
+            break; //proceed onward
         }
+        else if (!chars) {
+            return;
+        }
+
+    }
 
 ## String Building
 1. Loop for Char times

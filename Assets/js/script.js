@@ -12,7 +12,6 @@ function generatePassword() {
 
   // Assign final password to variable;
   let finalPassword = constructPassword();
-  console.log(">>>>>>>>" + finalPassword + "<<<<<<<<<");
   txtBox.innerHTML = finalPassword;
 }
 
@@ -29,14 +28,16 @@ var passwordObject = {
   arrayTypeSelections: [],
   string: "",
   rebuildCount: 0,
+  resetPassword: function () {
+    
+  }
 }
 
 //* MAIN FUNCTION: Calls the smaller functions to construct the password;
 function constructPassword() {
-
   console.log("[Event]Running constructPassword()");
 
-  // wipe object property values memory clean for creating a new password
+  // wipe object property values memory clean for creating a new password in case there are leftover data; should make a method
   passwordObject.arrayTypeSelections = [];
   passwordObject.typeUsed = "";
   passwordObject.string = "";
@@ -242,33 +243,12 @@ function buildPassword() {
     if (k === "lower") {
       passwordObject.string += getLower();
     }
-    console.log("[charLoop]Character: # " + i + "Type: " + k);
+    console.log("[charLoop]Character: #" + i + " Type: " + k);
     console.log("Current string: " + passwordObject.string);
   }
 
 
-  //#region ====================> "get" sub-functions <====================
-  // randomize thru arraySpec to get a special char
-  function getSpecial() {
-    console.log("[Event]Running getSpecial()");
-    return passwordObject.arraySpecials[Math.floor((Math.random() * passwordObject.arraySpecials.length))];
-  }
-  // randomize number from c char-chart
-  function getNumber() {
-    console.log("[Event]Running getNumber()");
-    return String.fromCharCode(Math.floor((Math.random() * 10) + 48));
-  }
-  // randomize upper from char-chart
-  function getUpper() {
-    console.log("[Event]Running getUpper()");
-    return String.fromCharCode(Math.floor((Math.random() * 26) + 65));
-  }
-  // randomize lower from char-chart
-  function getLower() {
-    console.log("[Event]Running getLower()");
-    return String.fromCharCode(Math.floor((Math.random() * 26) + 97));
-  }
-  //#endregion ================================================================================
+
 
   // call type validator; if false, generate password again
   let y = typeValidator();
@@ -289,27 +269,48 @@ function buildPassword() {
 }
 // */
 
+//#region ====================> all sub-functions <====================
+// randomize thru arraySpec to get a special char
+function getSpecial() {
+  console.log("[Event]Running getSpecial()");
+  return passwordObject.arraySpecials[Math.floor((Math.random() * passwordObject.arraySpecials.length))];
+}
+// randomize number from char-chart
+function getNumber() {
+  console.log("[Event]Running getNumber()");
+  return String.fromCharCode(Math.floor((Math.random() * 10) + 48));
+}
+// randomize upper from char-chart
+function getUpper() {
+  console.log("[Event]Running getUpper()");
+  return String.fromCharCode(Math.floor((Math.random() * 26) + 65));
+}
+// randomize lower from char-chart
+function getLower() {
+  console.log("[Event]Running getLower()");
+  return String.fromCharCode(Math.floor((Math.random() * 26) + 97));
+}
+
+
 //validates if the password contains at least 1 of each type selected
 function typeValidator() {
   console.log("[Event]Running typeValidator()");
+
   // loop thru types selected, check if they exist in types used, if not then recreate password until all are used
   for (let i = 0; i < passwordObject.arrayTypeSelections.length; i++) {
 
     let j = passwordObject.typeUsed.indexOf(passwordObject.arrayTypeSelections[i])
-    console.log(">>>>> " + j + " <<<<<");
 
     if (passwordObject.typeUsed.indexOf(passwordObject.arrayTypeSelections[i]) === -1) {
 
       console.log("[Alert]typeValidator(): Alert! Not all types were used, regenerating password!");
       return -1;
-
     }
+    // else return success
     else {
-
-      // return success
       console.log("[Alert]typeValidator(): Validation completed. All types used.");
       return 0
-
     }
   }
 }
+//#endregion ================================================================================
