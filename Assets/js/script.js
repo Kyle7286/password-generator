@@ -2,7 +2,6 @@
 let btnGenerate = document.getElementById("generate");
 let txtBox = document.getElementById("password");
 
-
 // On button click, run generatePassword() fuction;
 btnGenerate.addEventListener("click", generatePassword);
 
@@ -11,12 +10,9 @@ function generatePassword() {
   console.log("[Event]Generate Password button pressed");
   console.log("[Event]Running generatePassword()");
 
-
   // Assign final password to variable;
   let finalPassword = constructPassword();
   txtBox.innerHTML = finalPassword;
-  // clear password memory for next generation
-  passwordObject.string = ""
 }
 
 // Init Password object
@@ -38,10 +34,13 @@ var passwordObject = {
 //* MAIN FUNCTION: Calls the smaller functions to construct the password;
 function constructPassword() {
   console.log("[Event]Running constructPassword()");
+
   
-  // wipe memory clean for creating a new password
-  passwordObject.arrayTypeSelections = [];
-  passwordObject.typeUsed = "";
+
+  // // wipe object property values memory clean for creating a new password
+  // passwordObject.arrayTypeSelections = [];
+  // passwordObject.typeUsed = "";
+  // passwordObject.string = "";
 
   promptUser();
   return buildPassword();
@@ -49,8 +48,9 @@ function constructPassword() {
 }
 // */
 
-//* SUB FUNCTION: contains all the prompt logic and modifies the password object with the results
+//* SUB FUNCTIONS: contains all the prompt logic and modifies the password object with the results
 function promptUser() {
+  
   //START:  Character prompt - Loop the prompt until expected input is received, then proceed with function
   var promptChar;
   while (true) {
@@ -224,28 +224,28 @@ function buildPassword() {
     // random char type
     let k = passwordObject.arrayTypeSelections[Math.floor((Math.random() * passwordObject.arrayTypeSelections.length))];
     console.log("[charLoop]CharacterType:  " + k);
-    if (passwordObject.typeUsed.indexOf(k) === -1) {passwordObject.typeUsed += k}
+    if (passwordObject.typeUsed.indexOf(k) === -1) { passwordObject.typeUsed += k }
     console.log("[charLoop]Types Used: " + passwordObject.typeUsed);
 
     // Run character logic and return a character
     if (k === "number") {
-      console.log("if number statement");
+      console.log("[IF] number statement");
       passwordObject.string += getNumber();
       // console.log("[Event]Got: " + character);
     };
     if (k === "special") {
-      console.log("if special statement");
+      console.log("[IF] special statement");
       passwordObject.string += getSpecial();
       // console.log("[Event]Got: " + character);
     };
     if (k === "upper") {
-      console.log("if upper statement");
+      console.log("[IF] upper statement");
       passwordObject.string += getUpper();
       // console.log("[Event]Got: " + character);
 
     };
     if (k === "lower") {
-      console.log("if lower statement");
+      console.log("[IF] lower statement");
       passwordObject.string += getLower();
       // console.log("[Event]Got: " + character);
     };
@@ -255,8 +255,6 @@ function buildPassword() {
 
     console.log("Current string: " + passwordObject.string);
   }
-
-
   //#region "get" sub-functions
   // randomize thru arraySpec to get a special char
   function getSpecial() {
@@ -316,7 +314,10 @@ function typeValidator() {
       console.log("[Alert]typeValidator(): Alert! Not all types were used, regenerating password!");
       buildPassword();
       return;
-      
-    }   
+    }
   }
+
+  // return success
+  console.log("[Alert]typeValidator(): Validation completed. All types used.");
+  return 0
 }
