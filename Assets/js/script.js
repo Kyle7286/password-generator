@@ -15,7 +15,8 @@ function generatePassword() {
   // Assign final password to variable;
   let finalPassword = constructPassword();
   txtBox.innerHTML = finalPassword;
-  
+  // clear password memory for next generation
+  passwordObject.string = ""
 }
 
 // Init Password object
@@ -217,10 +218,10 @@ function buildPassword() {
     if (k == "special") {
       passwordObject.string = passwordObject.string + getSpecial()
     };
-    if (k == "numbers") {
+    if (k == "number") {
       passwordObject.string = passwordObject.string + getNumber()
     };
-    if (k == "letters") {
+    if (k == "letter") {
       passwordObject.string = passwordObject.string + getSpecial()
     };
 
@@ -230,7 +231,7 @@ function buildPassword() {
     console.log("String is current: " + passwordObject.string);
   }
 
-  return passwordObject.string;
+
 
   // randomize thru arraySpec to get a letter
   function getSpecial() {
@@ -240,13 +241,20 @@ function buildPassword() {
     return character;
   }
 
+  // randomize thru arraySpec to get a letter
+  function getNumber() {
+    console.log("[Event]Running getNumber()");
+    let character = passwordObject.arrayNumbers[Math.floor((Math.random() * 10))];
+    console.log("[Event]Got: " + character);
+    return character;
+  }
 
 
 
 
 
 
-
+  return passwordObject.string;
 }
 // */
 
