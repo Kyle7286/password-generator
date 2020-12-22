@@ -29,6 +29,7 @@ var passwordObject = {
   typeSelected: 0,
   arraySpecials: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", "\,", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"],
   arrayType: ["lower", "upper", "number", "special"],
+  arrayTypeSelections: [],
   string: "",
 }
 
@@ -76,7 +77,7 @@ function promptUser() {
 
   console.log("[Object]password.chars:" + passwordObject.chars);
   console.log("[Prompt]Char: Loop complete!");
-  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:N/A\nUpper:N/A\nNumbers:N/A\nSpecials:N/A");
+  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:N/A\nUpper:N/A\nNumbers:N/A\nSpecials:N/A\narrayTypeSelections: " + passwordObject.arrayTypeSelections.join(","));
   console.log("-----------------------");
 
 
@@ -90,8 +91,12 @@ function promptUser() {
     if (promptLow) {
       passwordObject.lower = 1; //Update the password.lower with input
       passwordObject.typeSelected = 1;
+      passwordObject.arrayTypeSelections.push("lower"); // Add type to selections array for later type randomization
       console.log("[Object]password.lower:" + passwordObject.lower);
       console.log("[Object]password.typeSelected:" + passwordObject.typeSelected);
+      
+    
+      
       break; //proceed onward
     }
     // If canceled, record data and proceed with function
@@ -105,7 +110,7 @@ function promptUser() {
 
   console.log("[Confirm]Low: Loop complete!");
   console.log("-----------------------");
-  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:N/A\nNumbers:N/A\nSpecials:N/A");
+  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:N/A\nNumbers:N/A\nSpecials:N/A\narrayTypeSelections: " + passwordObject.arrayTypeSelections.join(","));
   console.log("-----------------------");
 
 
@@ -119,6 +124,7 @@ function promptUser() {
     if (promptUp) {
       passwordObject.upper = 1; //Update the password.upper with input
       passwordObject.typeSelected = 1;
+      passwordObject.arrayTypeSelections.push("upper"); // Add type to selections array for later type randomization
       console.log("[Object]password.upper:" + passwordObject.upper);
       console.log("[Object]password.typeSelected:" + passwordObject.typeSelected);
       break; //proceed onward
@@ -134,7 +140,7 @@ function promptUser() {
 
   console.log("[Confirm]Up: Loop complete!");
   console.log("-----------------------");
-  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.lower + "\nNumbers:N/A\nSpecials:N/A");
+  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.lower + "\nNumbers:N/A\nSpecials:N/A\narrayTypeSelections: " + passwordObject.arrayTypeSelections.join(","));
   console.log("-----------------------");
 
 
@@ -150,8 +156,10 @@ function promptUser() {
     if (promptNum) {
       passwordObject.numbers = 1; //Update the password.numbers with input
       passwordObject.typeSelected = 1;
+      passwordObject.arrayTypeSelections.push("number") // Add type to selections array for later type randomization
       console.log("[Object]password.numbers:" + passwordObject.numbers);
       console.log("[Object]password.typeSelected:" + passwordObject.typeSelected);
+      
       break; //proceed onward
     }
     // If canceled, record data and proceed with function
@@ -164,7 +172,7 @@ function promptUser() {
 
   console.log("[Confirm]Num: Loop complete!");
   console.log("-----------------------");
-  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.upper + "\nNumbers:" + passwordObject.numbers + "\nSpecials:N/A");
+  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.upper + "\nNumbers:" + passwordObject.numbers + "\nSpecials:N/A\narrayTypeSelections: " + passwordObject.arrayTypeSelections.join(","));
   console.log("-----------------------");
 
 
@@ -178,6 +186,7 @@ function promptUser() {
     if (promptSpec) {
       passwordObject.special = 1; //Update the password.special with input
       passwordObject.typeSelected = 1;
+      passwordObject.arrayTypeSelections.push("special") // Add type to selections array for later type randomization
       console.log("[Object]password.special:" + passwordObject.special);
       console.log("[Object]password.typeSelected:" + passwordObject.typeSelected);
       break; //proceed onward
@@ -192,7 +201,7 @@ function promptUser() {
 
   console.log("[Confirm]Spec: Loop complete!");
   console.log("-----------------------");
-  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.upper + "\nNumbers:" + passwordObject.numbers + "\nSpecial:" + passwordObject.special);
+  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.upper + "\nNumbers:" + passwordObject.numbers + "\nSpecial:" + passwordObject.special + "\narrayTypeSelections: " + passwordObject.arrayTypeSelections.join(","));
   console.log("-----------------------");
   console.log("[Event]End constructPassword()");
   // passwordObject.typeSelected = 0 //Resetting this value for testing reasons due to entering the procedure anew each attempt; keep at the end;
@@ -216,29 +225,29 @@ function buildPassword() {
 
 
 
-    // Run character logic and return a character
-    if (k === "number" && passwordObject.numbers === 1) {
-      console.log("if number statement");
-      passwordObject.string = passwordObject.string + getNumber();
-      console.log("[Event]Got: " + character);
-    };
-    if (k === "special" && passwordObject.special === 1) {
-      console.log("if special statement");
-      passwordObject.string = passwordObject.string + getSpecial();
-      console.log("[Event]Got: " + character);
-    };
+    // // Run character logic and return a character
+    // if (k === "number" && passwordObject.numbers === 1) {
+    //   console.log("if number statement");
+    //   passwordObject.string = passwordObject.string + getNumber();
+    //   console.log("[Event]Got: " + character);
+    // };
+    // if (k === "special" && passwordObject.special === 1) {
+    //   console.log("if special statement");
+    //   passwordObject.string = passwordObject.string + getSpecial();
+    //   console.log("[Event]Got: " + character);
+    // };
 
-    if (k === "upper" && passwordObject.upper === 1) {
-      console.log("if upper statement");
-      passwordObject.string = passwordObject.string + getUpper();
-      console.log("[Event]Got: " + character);
+    // if (k === "upper" && passwordObject.upper === 1) {
+    //   console.log("if upper statement");
+    //   passwordObject.string = passwordObject.string + getUpper();
+    //   console.log("[Event]Got: " + character);
 
-    };
-    if (k === "lower" && passwordObject.lower === 1) {
-      console.log("if lower statement");
-      passwordObject.string = passwordObject.string + getLower();
-      console.log("[Event]Got: " + character);
-    };
+    // };
+    // if (k === "lower" && passwordObject.lower === 1) {
+    //   console.log("if lower statement");
+    //   passwordObject.string = passwordObject.string + getLower();
+    //   console.log("[Event]Got: " + character);
+    // };
     // if (passwordObject.upper === 1 && passwordObject.lower === 1) {
     //   passwordObject.string = passwordObject.string + getLetter();
     // };
@@ -253,28 +262,28 @@ function buildPassword() {
   // randomize thru arraySpec to get a special char
   function getSpecial() {
     console.log("[Event]Running getSpecial()");
-    let character = passwordObject.arraySpecials[Math.floor((Math.random() * passwordObject.arraySpecials.length))];
-    console.log("[Event]Got: " + character);
-    return character;
+    return passwordObject.arraySpecials[Math.floor((Math.random() * passwordObject.arraySpecials.length))];    
   }
 
-  // randomize thru arrayNum to get a number char
+  // randomize number from c char-chart
   function getNumber() {
     console.log("[Event]Running getNumber()");
     return String.fromCharCode(Math.floor((Math.random() * 10) + 48));
   }
 
-  // randomize thru arrayLet to get a letter char
+  // randomize upper from char-chart
   function getUpper() {
     console.log("[Event]Running getUpper()");
     return String.fromCharCode(Math.floor((Math.random() * 26) + 65));
   }
 
+  // randomize lower from char-chart
   function getLower() {
     console.log("[Event]Running getLower()");
     return String.fromCharCode(Math.floor((Math.random() * 26) + 97));
   }
 
+  // randomize upper or lower from char-chart.  This is if user selected
   function getLetter() {
     let lType = Math.floor((Math.random() * 2) + 1);
     if (lType = 1) { return getUpper() }
