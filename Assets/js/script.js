@@ -14,6 +14,8 @@ function generatePassword() {
 
   // Assign final password to variable;
   let finalPassword = constructPassword();
+  txtBox.innerHTML = finalPassword;
+  
 }
 
 // Init Password object
@@ -37,7 +39,8 @@ var passwordObject = {
 function constructPassword() {
   console.log("[Event]Running constructPassword()");
   promptUser();
-  buildPassword();
+  return buildPassword();
+
 }
 // */
 
@@ -211,29 +214,29 @@ function buildPassword() {
     console.log("[charLoop]CharacterType:  " + k);
 
     // Run character logic and return a character
-    if (k == "special") {  
-      passwordObject.string = passwordObject.string + getSpecial()  
+    if (k == "special") {
+      passwordObject.string = passwordObject.string + getSpecial()
     };
-    if (k == "numbers") {  
-      passwordObject.string = passwordObject.string + getSpecial()  
+    if (k == "numbers") {
+      passwordObject.string = passwordObject.string + getNumber()
     };
-    if (k == "letters") {  
-      passwordObject.string = passwordObject.string + getSpecial()  
+    if (k == "letters") {
+      passwordObject.string = passwordObject.string + getSpecial()
     };
 
 
 
-    
-    console.log("String is current: "+passwordObject.string);
+
+    console.log("String is current: " + passwordObject.string);
   }
 
-  return
+  return passwordObject.string;
 
   // randomize thru arraySpec to get a letter
   function getSpecial() {
     console.log("[Event]Running getSpecial()");
     let character = passwordObject.arraySpecials[Math.floor((Math.random() * 32))];
-    console.log("[Event]Got: "+character);
+    console.log("[Event]Got: " + character);
     return character;
   }
 
