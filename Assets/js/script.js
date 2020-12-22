@@ -28,7 +28,6 @@ var passwordObject = {
   special: 0,
   typeSelected: 0,
   arraySpecials: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", "\,", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"],
-  arrayType: ["lower", "upper", "number", "special"],
   arrayTypeSelections: [],
   string: "",
 }
@@ -95,9 +94,9 @@ function promptUser() {
       passwordObject.arrayTypeSelections.push("lower"); // Add type to selections array for later type randomization
       console.log("[Object]password.lower:" + passwordObject.lower);
       console.log("[Object]password.typeSelected:" + passwordObject.typeSelected);
-      
-    
-      
+
+
+
       break; //proceed onward
     }
     // If canceled, record data and proceed with function
@@ -160,7 +159,7 @@ function promptUser() {
       passwordObject.arrayTypeSelections.push("number") // Add type to selections array for later type randomization
       console.log("[Object]password.numbers:" + passwordObject.numbers);
       console.log("[Object]password.typeSelected:" + passwordObject.typeSelected);
-      
+
       break; //proceed onward
     }
     // If canceled, record data and proceed with function
@@ -216,42 +215,34 @@ function buildPassword() {
   // main loop; loop total chars long, for each character slot -> random type -> random char -> random case style
   for (let i = 0; i < passwordObject.chars; i++) {
     console.log("[charLoop]Character: #" + i);
-    
+
     // random char type
     let k = passwordObject.arrayTypeSelections[Math.floor((Math.random() * passwordObject.arrayTypeSelections.length))];
     console.log("[charLoop]CharacterType:  " + k);
 
-    
-  
+    // Run character logic and return a character
+    if (k === "number") {
+      console.log("if number statement");
+      passwordObject.string = passwordObject.string + getNumber();
+      // console.log("[Event]Got: " + character);
+    };
+    if (k === "special") {
+      console.log("if special statement");
+      passwordObject.string = passwordObject.string + getSpecial();
+      // console.log("[Event]Got: " + character);
+    };
+    if (k === "upper") {
+      console.log("if upper statement");
+      passwordObject.string = passwordObject.string + getUpper();
+      // console.log("[Event]Got: " + character);
 
+    };
+    if (k === "lower") {
+      console.log("if lower statement");
+      passwordObject.string = passwordObject.string + getLower();
+      // console.log("[Event]Got: " + character);
+    };
 
-
-    // // Run character logic and return a character
-    // if (k === "number" && passwordObject.numbers === 1) {
-    //   console.log("if number statement");
-    //   passwordObject.string = passwordObject.string + getNumber();
-    //   console.log("[Event]Got: " + character);
-    // };
-    // if (k === "special" && passwordObject.special === 1) {
-    //   console.log("if special statement");
-    //   passwordObject.string = passwordObject.string + getSpecial();
-    //   console.log("[Event]Got: " + character);
-    // };
-
-    // if (k === "upper" && passwordObject.upper === 1) {
-    //   console.log("if upper statement");
-    //   passwordObject.string = passwordObject.string + getUpper();
-    //   console.log("[Event]Got: " + character);
-
-    // };
-    // if (k === "lower" && passwordObject.lower === 1) {
-    //   console.log("if lower statement");
-    //   passwordObject.string = passwordObject.string + getLower();
-    //   console.log("[Event]Got: " + character);
-    // };
-    // if (passwordObject.upper === 1 && passwordObject.lower === 1) {
-    //   passwordObject.string = passwordObject.string + getLetter();
-    // };
 
 
 
@@ -263,7 +254,7 @@ function buildPassword() {
   // randomize thru arraySpec to get a special char
   function getSpecial() {
     console.log("[Event]Running getSpecial()");
-    return passwordObject.arraySpecials[Math.floor((Math.random() * passwordObject.arraySpecials.length))];    
+    return passwordObject.arraySpecials[Math.floor((Math.random() * passwordObject.arraySpecials.length))];
   }
 
   // randomize number from c char-chart
@@ -301,13 +292,13 @@ function buildPassword() {
 
 
 
-//#endregion
+  //#endregion
 
 
 
 
 
-return passwordObject.string;
+  return passwordObject.string;
 }
 // */
 
