@@ -33,13 +33,14 @@ var passwordObject = {
 
 //* MAIN FUNCTION: Calls the smaller functions to construct the password;
 function constructPassword() {
-  
+
   console.log("[Event]Running constructPassword()");
 
   // wipe object property values memory clean for creating a new password
   passwordObject.arrayTypeSelections = [];
   passwordObject.typeUsed = "";
   passwordObject.string = "";
+  passwordObject.typeSelected = 0;
 
   promptUser();
   return buildPassword();
@@ -49,7 +50,7 @@ function constructPassword() {
 
 //* SUB FUNCTIONS: contains all the prompt logic and modifies the password object with the results
 function promptUser() {
-  
+
   //START:  Character prompt - Loop the prompt until expected input is received, then proceed with function
   var promptChar;
   while (true) {
@@ -158,10 +159,10 @@ function promptUser() {
     console.log("[Confirm]Num: User input=" + promptNum);
     // If user input is true
     if (promptNum) {
-      passwordObject.numbers = 1; //Update the password.numbers with input
+      passwordObject.number = 1; //Update the password.number with input
       passwordObject.typeSelected = 1;
       passwordObject.arrayTypeSelections.push("number") // Add type to selections array for later type randomization
-      console.log("[Object]password.numbers:" + passwordObject.numbers);
+      console.log("[Object]password.number:" + passwordObject.number);
       console.log("[Object]password.typeSelected:" + passwordObject.typeSelected);
 
       break; //proceed onward
@@ -169,14 +170,14 @@ function promptUser() {
     // If canceled, record data and proceed with function
     else {
       console.log("[Confirm]Num: User canceled");
-      passwordObject.numbers = 0
+      passwordObject.number = 0
       break; // proceed with function
     }
   } //END: Numbers prompt
 
   console.log("[Confirm]Num: Loop complete!");
   console.log("-----------------------");
-  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.upper + "\nNumbers:" + passwordObject.numbers + "\nSpecials:N/A\narrayTypeSelections: " + passwordObject.arrayTypeSelections.join(","));
+  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.upper + "\nNumbers:" + passwordObject.number + "\nSpecials:N/A\narrayTypeSelections: " + passwordObject.arrayTypeSelections.join(","));
   console.log("-----------------------");
 
 
@@ -205,7 +206,7 @@ function promptUser() {
 
   console.log("[Confirm]Spec: Loop complete!");
   console.log("-----------------------");
-  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.upper + "\nNumbers:" + passwordObject.numbers + "\nSpecial:" + passwordObject.special + "\narrayTypeSelections: " + passwordObject.arrayTypeSelections.join(","));
+  console.log("Current selections:\nChars:" + passwordObject.chars + "\nLower:" + passwordObject.lower + "\nUpper:" + passwordObject.upper + "\nNumbers:" + passwordObject.number + "\nSpecial:" + passwordObject.special + "\narrayTypeSelections: " + passwordObject.arrayTypeSelections.join(","));
   console.log("-----------------------");
   console.log("[Event]End constructPassword()");
   // passwordObject.typeSelected = 0 //Resetting this value for testing reasons due to entering the procedure anew each attempt; keep at the end;
@@ -248,9 +249,6 @@ function buildPassword() {
       passwordObject.string += getLower();
       // console.log("[Event]Got: " + character);
     };
-
-
-
 
     console.log("Current string: " + passwordObject.string);
   }
@@ -298,13 +296,22 @@ function buildPassword() {
 
   //#endregion
 
-  // call type validator
-  typeValidator();
-
-  console.log(passwordObject);
-
+  // call type validator; if false, generate password again
+  let y = typeValidator();
+  console.log("VALIDATOR SAYS: " + y);
+  if (y === -1) {
+    passwordObject.string = ""
+    passwordObject.typeUsed = ""
+    buildPassword()
+  }
   // return the final string
-  return passwordObject.string;
+  else {
+    console.log(passwordObject);
+    return passwordObject.string;
+    stop;
+  }
+  
+
 }
 // */
 
@@ -315,8 +322,8 @@ function typeValidator() {
   for (let i = 0; i < passwordObject.arrayTypeSelections.length; i++) {
     if (passwordObject.typeUsed.indexOf(passwordObject.arrayTypeSelections[i]) === -1) {
       console.log("[Alert]typeValidator(): Alert! Not all types were used, regenerating password!");
-      buildPassword();
-      return;
+
+      return -1;
     }
   }
 
