@@ -38,6 +38,7 @@ var passwordObject = {
 //* MAIN FUNCTION: Calls the smaller functions to construct the password;
 function constructPassword() {
   console.log("[Event]Running constructPassword()");
+  passwordObject.arrayTypeSelections = [];
   promptUser();
   return buildPassword();
 
@@ -217,11 +218,11 @@ function buildPassword() {
     console.log("[charLoop]Character: #" + i);
     
     // random char type
-    let k = passwordObject.arrayType[Math.floor((Math.random() * 4))];
+    let k = passwordObject.arrayTypeSelections[Math.floor((Math.random() * passwordObject.arrayTypeSelections.length))];
     console.log("[charLoop]CharacterType:  " + k);
 
     
-
+  
 
 
 
