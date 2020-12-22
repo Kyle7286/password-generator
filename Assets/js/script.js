@@ -27,7 +27,8 @@ var passwordObject = {
   arrayLetters: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
   arrayNumbers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
   arraySpecials: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", "\,", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"],
-  arrayType: ["letter", "number", "special"]
+  arrayType: ["letter", "number", "special"],
+  string: "",
 }
 
 
@@ -203,19 +204,39 @@ function buildPassword() {
   // main loop; loop total chars long, for each character slot -> random type -> random char -> random case style
   for (let i = 0; i < passwordObject.chars; i++) {
     // random char type
+    console.log("[charLoop]Character: #" + i);
     let j = Math.floor((Math.random() * 3));
-    console.log("[charLoop]Character: #" + j);
     // char type chosen
     let k = passwordObject.arrayType[j];
     console.log("[charLoop]CharacterType:  " + k);
+
     // Run character logic and return a character
-    if (k == "special") { let character = getSpecial() };
-    else if () { }
-    else if () { }
+    if (k == "special") {  
+      passwordObject.string = passwordObject.string + getSpecial()  
+    };
+    if (k == "numbers") {  
+      passwordObject.string = passwordObject.string + getSpecial()  
+    };
+    if (k == "letters") {  
+      passwordObject.string = passwordObject.string + getSpecial()  
+    };
+
+
+
+    
+    console.log("String is current: "+passwordObject.string);
   }
 
+  return
 
-    function getSpecial
+  // randomize thru arraySpec to get a letter
+  function getSpecial() {
+    console.log("[Event]Running getSpecial()");
+    let character = passwordObject.arraySpecials[Math.floor((Math.random() * 32))];
+    console.log("[Event]Got: "+character);
+    return character;
+  }
+
 
 
 
