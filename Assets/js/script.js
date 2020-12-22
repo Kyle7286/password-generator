@@ -10,8 +10,8 @@ btnGenerate.addEventListener("click", generatePassword);
 function generatePassword() {
   console.log("[Event]Generate Password button pressed");
   console.log("[Event]Running generatePassword()");
-  
-  
+
+
   // Assign final password to variable;
   let finalPassword = constructPassword();
 }
@@ -27,6 +27,7 @@ var passwordObject = {
   arrayLetters: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
   arrayNumbers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
   arraySpecials: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", "\,", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"],
+  arrayType: ["letter", "number", "special"]
 }
 
 
@@ -200,14 +201,26 @@ function buildPassword() {
   console.log("[Event]Running buildPassword()");
 
   // main loop; loop total chars long, for each character slot -> random type -> random char -> random case style
-  for (let i = 0; i < passwordObject.chars; i ++) {
-      
-      
-      
-
-
-
+  for (let i = 0; i < passwordObject.chars; i++) {
+    // random char type
+    let j = Math.floor((Math.random() * 3));
+    console.log("[charLoop]Character: #" + j);
+    // char type chosen
+    let k = passwordObject.arrayType[j];
+    console.log("[charLoop]CharacterType:  " + k);
+    // Run character logic and return a character
+    if (k == "special") { let character = getSpecial() };
+    else if () { }
+    else if () { }
   }
+
+
+    function getSpecial
+
+
+
+
+
 
 
 }
