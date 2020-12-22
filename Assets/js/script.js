@@ -27,6 +27,7 @@ var passwordObject = {
   upper: 0,
   special: 0,
   typeSelected: 0,
+  typeUsed: "",
   arraySpecials: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", "\,", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"],
   arrayTypeSelections: [],
   string: "",
@@ -37,7 +38,11 @@ var passwordObject = {
 //* MAIN FUNCTION: Calls the smaller functions to construct the password;
 function constructPassword() {
   console.log("[Event]Running constructPassword()");
+  
+  // wipe memory clean for creating a new password
   passwordObject.arrayTypeSelections = [];
+  passwordObject.typeUsed = "";
+
   promptUser();
   return buildPassword();
 
@@ -219,27 +224,29 @@ function buildPassword() {
     // random char type
     let k = passwordObject.arrayTypeSelections[Math.floor((Math.random() * passwordObject.arrayTypeSelections.length))];
     console.log("[charLoop]CharacterType:  " + k);
+    if (passwordObject.typeUsed.indexOf(k) === -1) {passwordObject.typeUsed += k}
+    console.log("[charLoop]Types Used: " + passwordObject.typeUsed);
 
     // Run character logic and return a character
     if (k === "number") {
       console.log("if number statement");
-      passwordObject.string = passwordObject.string + getNumber();
+      passwordObject.string += getNumber();
       // console.log("[Event]Got: " + character);
     };
     if (k === "special") {
       console.log("if special statement");
-      passwordObject.string = passwordObject.string + getSpecial();
+      passwordObject.string += getSpecial();
       // console.log("[Event]Got: " + character);
     };
     if (k === "upper") {
       console.log("if upper statement");
-      passwordObject.string = passwordObject.string + getUpper();
+      passwordObject.string += getUpper();
       // console.log("[Event]Got: " + character);
 
     };
     if (k === "lower") {
       console.log("if lower statement");
-      passwordObject.string = passwordObject.string + getLower();
+      passwordObject.string += getLower();
       // console.log("[Event]Got: " + character);
     };
 
@@ -294,11 +301,22 @@ function buildPassword() {
 
   //#endregion
 
-
-
-
-
+  // call type validator
+  typeValidator();
   return passwordObject.string;
 }
 // */
 
+//validates if the password contains at least 1 of each type selected
+function typeValidator() {
+  console.log("[Event]Running typeValidator()");
+  // loop thru types selected, check if they exist in types used, if not then recreate password until all are used
+  for (let i = 0; i < passwordObject.arrayTypeSelections.length; i++) {
+    if (passwordObject.typeUsed.indexOf(passwordObject.arrayTypeSelections[i]) === -1) {
+      console.log("[Alert]typeValidator(): Alert! Not all types were used, regenerating password!");
+      buildPassword();
+      return;
+      
+    }   
+  }
+}

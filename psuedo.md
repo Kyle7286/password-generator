@@ -30,6 +30,11 @@
 ## String Building
 1. Loop for Char times
 
+
+## Validator
+    1. 
+
+
                 
 
 
