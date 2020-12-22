@@ -22,15 +22,13 @@ function generatePassword() {
 // Init Password object
 var passwordObject = {
   chars: 0,
-  numbers: 0,
+  number: 0,
   lower: 0,
   upper: 0,
   special: 0,
   typeSelected: 0,
-  arrayLetters: ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"],
-  arrayNumbers: [0, 1, 2, 3, 4, 5, 6, 7, 8, 9],
   arraySpecials: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", "\,", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"],
-  arrayType: ["letter", "number", "special"],
+  arrayType: ["lower", "upper", "number", "special"],
   string: "",
 }
 
@@ -207,46 +205,80 @@ function buildPassword() {
 
   // main loop; loop total chars long, for each character slot -> random type -> random char -> random case style
   for (let i = 0; i < passwordObject.chars; i++) {
-    // random char type
     console.log("[charLoop]Character: #" + i);
-    let j = Math.floor((Math.random() * 3));
-    // char type chosen
-    let k = passwordObject.arrayType[j];
+    
+    // random char type
+    let k = passwordObject.arrayType[Math.floor((Math.random() * 4))];
     console.log("[charLoop]CharacterType:  " + k);
 
+    
+
+
+
+
     // Run character logic and return a character
-    if (k == "special") {
-      passwordObject.string = passwordObject.string + getSpecial()
+    if (k === "number" && passwordObject.numbers === 1) {
+      console.log("if number statement");
+      passwordObject.string = passwordObject.string + getNumber();
+      console.log("[Event]Got: " + character);
     };
-    if (k == "number") {
-      passwordObject.string = passwordObject.string + getNumber()
+    if (k === "special" && passwordObject.special === 1) {
+      console.log("if special statement");
+      passwordObject.string = passwordObject.string + getSpecial();
+      console.log("[Event]Got: " + character);
     };
-    if (k == "letter") {
-      passwordObject.string = passwordObject.string + getSpecial()
+
+    if (k === "upper" && passwordObject.upper === 1) {
+      console.log("if upper statement");
+      passwordObject.string = passwordObject.string + getUpper();
+      console.log("[Event]Got: " + character);
+
     };
+    if (k === "lower" && passwordObject.lower === 1) {
+      console.log("if lower statement");
+      passwordObject.string = passwordObject.string + getLower();
+      console.log("[Event]Got: " + character);
+    };
+    // if (passwordObject.upper === 1 && passwordObject.lower === 1) {
+    //   passwordObject.string = passwordObject.string + getLetter();
+    // };
 
 
 
-
-    console.log("String is current: " + passwordObject.string);
+    console.log("Current string: " + passwordObject.string);
   }
 
 
-
-  // randomize thru arraySpec to get a letter
+  //#region "get" sub-functions
+  // randomize thru arraySpec to get a special char
   function getSpecial() {
     console.log("[Event]Running getSpecial()");
-    let character = passwordObject.arraySpecials[Math.floor((Math.random() * 32))];
+    let character = passwordObject.arraySpecials[Math.floor((Math.random() * passwordObject.arraySpecials.length))];
     console.log("[Event]Got: " + character);
     return character;
   }
 
-  // randomize thru arraySpec to get a letter
+  // randomize thru arrayNum to get a number char
   function getNumber() {
     console.log("[Event]Running getNumber()");
-    let character = passwordObject.arrayNumbers[Math.floor((Math.random() * 10))];
-    console.log("[Event]Got: " + character);
-    return character;
+    return String.fromCharCode(Math.floor((Math.random() * 10) + 48));
+  }
+
+  // randomize thru arrayLet to get a letter char
+  function getUpper() {
+    console.log("[Event]Running getUpper()");
+    return String.fromCharCode(Math.floor((Math.random() * 26) + 65));
+  }
+
+  function getLower() {
+    console.log("[Event]Running getLower()");
+    return String.fromCharCode(Math.floor((Math.random() * 26) + 97));
+  }
+
+  function getLetter() {
+    let lType = Math.floor((Math.random() * 2) + 1);
+    if (lType = 1) { return getUpper() }
+    if (lType = 2) { return getLower() }
   }
 
 
@@ -254,7 +286,18 @@ function buildPassword() {
 
 
 
-  return passwordObject.string;
+
+
+
+
+
+//#endregion
+
+
+
+
+
+return passwordObject.string;
 }
 // */
 
