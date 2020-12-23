@@ -18,9 +18,9 @@ function generatePassword() {
 //Password object to hold values during construction
 var passwordObject = {
   chars: 0,
-  number: 0,
   lower: 0,
   upper: 0,
+  number: 0,
   special: 0,
   typeSelected: 0,
   typeUsed: "",
@@ -33,7 +33,7 @@ var passwordObject = {
     this.string = "";
     this.typeUsed = "";
     this.arrayTypeSelections = [];
-    this.typeSelected = 0;
+    this.ntypeTotal = 0;
     this.rebuildCount = 0;
   }
 }
@@ -51,8 +51,6 @@ function constructPassword() {
   return j
 }
 
-
-//* SUB FUNCTIONS: contains all the prompt logic and modifies the password object with the results
 function promptUser() {
 
   //START:  Character prompt - Loop the prompt until expected input is received, then proceed with function
@@ -87,131 +85,18 @@ function promptUser() {
     }
   }
 
-  console.log("[Prompt]Char: Loop complete!");
+  var lower = confirm("Would you like to include any lower case characters?");
+  var upper = confirm("Would you like to include any upper case characters?");
+  var number = confirm("Would you like to include any numbers?");
+  var special = confirm("Would you like to include any special characters?");
+
+  passwordObject.ntypeTotal = (passwordObject.lower + passwordObject.upper + passwordObject.special + passwordObject.number);
+  passwordObject.aTypes = [{ lower }, { upper }, { number }, { special }].filter(item => Object.values(item)[0]  );
+  
   console.log(passwordObject);
-  console.log("-----------------------");
 
-
-  //START: lower prompt - Loop the prompt until expected input is received, then proceed with function
-  var promptLow;
-  while (!promptLow) {
-    console.log("[Confirm]Low: User Prompted");
-    var promptLow = confirm("Would you like to include any lower case characters?");
-    console.log("[Confirm]Low: User input=" + promptLow);
-
-    // If user input is true
-    if (promptLow) {
-      passwordObject.lower = 1; //Update the password.lower with input
-      passwordObject.typeSelected = 1;
-      passwordObject.arrayTypeSelections.push("lower"); // Add type to selections array for later type randomization
-      // console.log("[Object]password.lower:" + passwordObject.lower);
-
-      break; //proceed onward
-    }
-    // If canceled, record data and proceed with function
-    else {
-      console.log("[Confirm]Low: User canceled");
-      passwordObject.lower = 0
-      // console.log("[Object]password.lower:" + passwordObject.lower);
-      break; // proceed with function
-    }
-  }
-
-  console.log("[Confirm]Low: Loop complete!");
-  console.log("-----------------------");
-  console.log(passwordObject);
-  console.log("-----------------------");
-
-
-  //START: upper prompt - Loop the prompt until expected input is received, then proceed with function
-  var promptUp;
-  while (!promptUp) {
-    console.log("[Confirm]Up: User Prompted");
-    var promptUp = confirm("Would you like to include any upper case characters?");
-    console.log("[Confirm]Up: User input=" + promptUp);
-
-    // If user input is true
-    if (promptUp) {
-      passwordObject.upper = 1; //Update the password.upper with input
-      passwordObject.typeSelected = 1;
-      passwordObject.arrayTypeSelections.push("upper"); // Add type to selections array for later type randomization
-      console.log("[Object]password.upper:" + passwordObject.upper);
-
-      break; //proceed onward
-    }
-    // If canceled, record data and proceed with function
-    else {
-      console.log("[Confirm]Up: User canceled");
-      passwordObject.upper = 0;
-      console.log("[Object]password.upper:" + passwordObject.upper);
-      break; // proceed with function
-    }
-  }
-
-  console.log("[Confirm]Up: Loop complete!");
-  console.log("-----------------------");
-  console.log(passwordObject);
-  console.log("-----------------------");
-
-  //START: Numbers prompt - Loop the prompt until expected input is received, then proceed with function
-  var promptNum;
-  while (!promptNum) {
-    console.log("[Confirm]Num: User Prompted");
-    var promptNum = confirm("Would you like to include any numbers?");
-    console.log("[Confirm]Num: User input=" + promptNum);
-
-    // If user input is true
-    if (promptNum) {
-      passwordObject.number = 1; //Update the password.number with input
-      passwordObject.typeSelected = 1;
-      passwordObject.arrayTypeSelections.push("number") // Add type to selections array for later type randomization
-      console.log("[Object]password.number:" + passwordObject.number);
-      break; //proceed onward
-    }
-    // If canceled, record data and proceed with function
-    else {
-      console.log("[Confirm]Num: User canceled");
-      passwordObject.number = 0;
-      break; // proceed with function
-    }
-  }
-
-  console.log("[Confirm]Num: Loop complete!");
-  console.log("-----------------------");
-  console.log(passwordObject);
-  console.log("-----------------------");
-
-  //START: Special prompt - Loop the prompt until expected input is received, then proceed with function
-  var promptSpec;
-  while (!promptSpec) {
-    console.log("[Confirm]Spec: User Prompted");
-    var promptSpec = confirm("Would you like to include any special characters?");
-    console.log("[Confirm]Spec: User input=" + promptSpec);
-
-    // If user input is true
-    if (promptSpec) {
-      passwordObject.special = 1; //Update the password.special with input
-      passwordObject.typeSelected = 1;
-      passwordObject.arrayTypeSelections.push("special") // Add type to selections array for later type randomization
-      console.log("[Object]password.special:" + passwordObject.special);
-
-      break; //proceed onward
-    }
-    // If canceled, record data and proceed with function
-    else {
-      console.log("[Confirm]Spec: User canceled");
-      passwordObject.special = 0
-      break; // proceed with function
-    }
-  } //END: Special prompt
-
-  console.log("[Confirm]Spec: Loop complete!");
-  console.log("-----------------------");
-  console.log(passwordObject);
-  console.log("-----------------------");
-  console.log("[Event]End prompUser()");
 }
-// */
+
 
 //* go thru the password building process
 function buildPassword() {
@@ -240,8 +125,8 @@ function buildPassword() {
     else if (k === "lower") {
       passwordObject.string += getLower();
     }
-    console.log("[charLoop]Character:#" + (i+1) + " Type:" + k + 
-                "\tCurrent string: " + passwordObject.string);
+    console.log("[charLoop]Character:#" + (i + 1) + " Type:" + k +
+      "\tCurrent string: " + passwordObject.string);
   }
 
   // call type validator; if false, generate password again
