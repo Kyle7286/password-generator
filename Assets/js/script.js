@@ -9,13 +9,12 @@ btnGenerate.addEventListener("click", generatePassword);
 function generatePassword() {
   console.log("[Event]Generate Password button pressed");
   console.log("[Event]Running generatePassword()");
-
   // Assign final password to variable;
   let finalPassword = constructPassword();
   txtBox.innerHTML = finalPassword;
 }
 
-// Init Password object to hold values during construction
+//Password object to hold values during construction
 var passwordObject = {
   chars: 0,
   number: 0,
@@ -28,8 +27,13 @@ var passwordObject = {
   arrayTypeSelections: [],
   string: "",
   rebuildCount: 0,
-  resetPassword: function () {
-    
+  // clears the cached dynamic data
+  initPassword: function () {
+    this.string = "";
+    this.typeUsed = "";
+    this.arrayTypeSelections = [];
+    this.typeSelected = 0;
+    this.rebuildCount = 0;
   }
 }
 
@@ -38,11 +42,7 @@ function constructPassword() {
   console.log("[Event]Running constructPassword()");
 
   // wipe object property values memory clean for creating a new password in case there are leftover data; should make a method
-  passwordObject.arrayTypeSelections = [];
-  passwordObject.typeUsed = "";
-  passwordObject.string = "";
-  passwordObject.typeSelected = 0;
-  passwordObject.rebuildCount = 0;
+  passwordObject.initPassword();
 
   let i = promptUser();
   let j = buildPassword();
@@ -64,6 +64,7 @@ function promptUser() {
     // If user input is blank or empty, reloop again until proper input
     if (promptChar == "") {
       console.log("[Prompt]Char: User entered no input; relooping");
+      alert("No input was received.  Please try again.")
       continue;
     }
     // If user input is a number (true) & between 8-128
@@ -80,6 +81,7 @@ function promptUser() {
     }
     else {
       console.log("[Prompt]Char: User input did not meet requested parameters");
+      alert("Input did not meet the password limitations.  Please try again.")
       continue;
     }
   } //END: Character prompt
@@ -181,7 +183,6 @@ function promptUser() {
   console.log(passwordObject);
   console.log("-----------------------");
 
-
   //START: Special prompt - Loop the prompt until expected input is received, then proceed with function
   var promptSpec;
   while (!promptSpec) {
@@ -222,7 +223,6 @@ function buildPassword() {
   // main loop; loop total chars long, for each character slot -> random type -> random char -> random case style
   for (let i = 0; i < passwordObject.chars; i++) {
 
-
     // random char type
     let k = passwordObject.arrayTypeSelections[Math.floor((Math.random() * passwordObject.arrayTypeSelections.length))];
     console.log("[charLoop]CharacterType:  " + k);
@@ -246,9 +246,6 @@ function buildPassword() {
     console.log("[charLoop]Character: #" + i + " Type: " + k);
     console.log("Current string: " + passwordObject.string);
   }
-
-
-
 
   // call type validator; if false, generate password again
   let y = typeValidator();
@@ -290,7 +287,6 @@ function getLower() {
   console.log("[Event]Running getLower()");
   return String.fromCharCode(Math.floor((Math.random() * 26) + 97));
 }
-
 
 //validates if the password contains at least 1 of each type selected
 function typeValidator() {
