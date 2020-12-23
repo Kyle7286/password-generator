@@ -48,7 +48,6 @@ function constructPassword() {
   let j = buildPassword();
   console.log("CONSTRUCT PASSWORD RETURNING: " + j);
   return j
-
 }
 // */
 
@@ -76,7 +75,7 @@ function promptUser() {
     // If canceled out; exit function b/c this is mandatory
     else if (!promptChar) {
       console.log("[Prompt]Char: User canceled");
-      alert("Alert!\n\nCharacter length is required!\nTo continue with the password generator process, please start over and enter a value.")
+      alert("Canceling as requested...\nTo continue with the password generator process, please start over and enter a value.")
       return -1; // exit parent function
     }
     else {
@@ -84,7 +83,7 @@ function promptUser() {
       alert("Input did not meet the password limitations.  Please try again.")
       continue;
     }
-  } //END: Character prompt
+  }
 
   console.log("[Prompt]Char: Loop complete!");
   console.log(passwordObject);
@@ -114,7 +113,7 @@ function promptUser() {
       console.log("[Object]password.lower:" + passwordObject.lower);
       break; // proceed with function
     }
-  } //END: lower prompt
+  }
 
   console.log("[Confirm]Low: Loop complete!");
   console.log("-----------------------");
@@ -145,15 +144,12 @@ function promptUser() {
       console.log("[Object]password.upper:" + passwordObject.upper);
       break; // proceed with function
     }
-  } //END: upper prompt
+  }
 
   console.log("[Confirm]Up: Loop complete!");
   console.log("-----------------------");
   console.log(passwordObject);
   console.log("-----------------------");
-
-
-
 
   //START: Numbers prompt - Loop the prompt until expected input is received, then proceed with function
   var promptNum;
@@ -176,7 +172,7 @@ function promptUser() {
       passwordObject.number = 0
       break; // proceed with function
     }
-  } //END: Numbers prompt
+  }
 
   console.log("[Confirm]Num: Loop complete!");
   console.log("-----------------------");
@@ -227,20 +223,20 @@ function buildPassword() {
     let k = passwordObject.arrayTypeSelections[Math.floor((Math.random() * passwordObject.arrayTypeSelections.length))];
     console.log("[charLoop]CharacterType:  " + k);
 
+    // If the type does not exist in the typeused property; append the type to the property; later to be validated to ensure all types selected are used at least once
     if (passwordObject.typeUsed.indexOf(k) === -1) { passwordObject.typeUsed += k }
-    // console.log("[charLoop]Types Used: " + passwordObject.typeUsed);
 
-    // Run character logic and return a character
+    // Run character logic and return a character; append to string
     if (k === "number") {
       passwordObject.string += getNumber();
-    };
-    if (k === "special") {
+    }
+    else if (k === "special") {
       passwordObject.string += getSpecial();
-    };
-    if (k === "upper") {
+    }
+    else if (k === "upper") {
       passwordObject.string += getUpper();
-    };
-    if (k === "lower") {
+    }
+    else if (k === "lower") {
       passwordObject.string += getLower();
     }
     console.log("[charLoop]Character: #" + i + " Type: " + k);
@@ -253,10 +249,10 @@ function buildPassword() {
 
   // if all available types werent used then reset string; reset typeused; add 1 rebuild counter; buildPassword again
   if (y === -1) {
-    passwordObject.string = ""
-    passwordObject.typeUsed = ""
-    passwordObject.rebuildCount++
-    return buildPassword()
+    passwordObject.string = "";
+    passwordObject.typeUsed = "";
+    passwordObject.rebuildCount++;
+    return buildPassword();
   }
   // return the final string
   else {
