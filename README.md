@@ -11,7 +11,7 @@
 ## About/Purpose ❔
 ---
 
-The purpose of this webpage is to utilize javascript and create a password generator which accepts a specific set of criteria from the use and outputs a random, yet secure, password.
+    The purpose of this webpage is to utilize javascript and create a password generator which accepts a specific set of criteria from the user and outputs a random password containing at least one of each type selected.
 
 
 ## Takeaways 🥡
@@ -28,9 +28,7 @@ The purpose of this webpage is to utilize javascript and create a password gener
 
 ## Thank you 👍 
 ---
-Thank you for your time reviewing my project/code!<br>
-I offer you a relaxing scenery; enjoy.
-![Iceland](...)
+    Thank you for your time reviewing my project/code!
+    I offer you a relaxing scenery; enjoy.
+![Iceland](./Assets/images\east_fjords_Iceland.jpg)
 <span style="color:#a0c9f0">Eastern Fjords of Iceland</span>
-
-
