@@ -22,7 +22,7 @@ var passwordObject = {
   upper: 0,
   number: 0,
   special: 0,
-  typeSelected: 0,
+  typeSelected: "",
   typeUsed: "",
   arraySpecials: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", "\,", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"],
   arrayTypeSelections: [],
@@ -114,17 +114,19 @@ function buildPassword() {
   console.log("[Event]Running buildPassword()");
 
 
-  // random char type|  Object > array > object > property > key
-  let z = passwordObject.aTypes // Assign array of objects to z
-  for (let j = 0; j < z.length; j++) {
-    passwordObject.typeSelected += Object.getOwnPropertyNames(z[j])[0]
-  }
-  console.log(passwordObject.typeSelected);
-
+  // random char type |  Object.array[of objects] > property > key
+  let z = passwordObject.aTypes // Assign array of objects to z for easier use going forward
+  
   // main loop; loop total chars long, for each character slot -> random type -> random char -> random case style
   for (let i = 0; i < passwordObject.chars; i++) {
 
-
+    console.log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
+    let sType = Object.getOwnPropertyNames(passwordObject.aTypes[Math.floor((Math.random() * passwordObject.aTypes.length))])[0]
+    console.log("Current type selected randomly: "+  sType  )
+    if (passwordObject.typeUsed.indexOf(sType) === -1 ) { passwordObject.typeUsed += sType }
+    console.log("Current types used so far: "+  passwordObject.typeUsed);
+    console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
+  
     let k = Object.getOwnPropertyNames(passwordObject.aTypes[Math.floor((Math.random() * z.length))])[0]; // grab a random property name from the array of objects
     // If the type does not exist in the typeused property; append the type to the property; later to be validated to ensure all types selected are used at least once
     if (passwordObject.typeUsed.indexOf(k) === -1) { passwordObject.typeUsed += k }
