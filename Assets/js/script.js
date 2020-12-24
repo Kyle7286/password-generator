@@ -1,41 +1,37 @@
 // Assigning element's object information to a variable for later use
 let btnGenerate = document.getElementById("generate");
 let txtBox = document.getElementById("password");
-
 // On button click, run generatePassword() fuction;
 btnGenerate.addEventListener("click", generatePassword);
 
 // Master function; triggered by button click; keep it simple here
 function generatePassword() {
-  console.log("[Event]Generate Password button pressed");
-  console.log("[Event]Running generatePassword()");
+  console.log("[Event]\t\t\tGenerate Password button pressed");
+  console.log("[Event]\t\t\tRunning generatePassword()");
   // Assign final password to variable;
   let finalPassword = constructPassword();
   txtBox.innerHTML = finalPassword;
   console.log(">>>>>>>>>>>>>>>>>>>>>>> ALL COMPLETE <<<<<<<<<<<<<<<<<<<<<<<<<<<<");
 }
 
-//Password object to hold values during construction
+//Password object to hold values during construction; contains both static and dynamic data
 var passwordObject = {
   chars: 0,
   typeUsed: "",
   arraySpecials: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", "\,", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"],
-  arrayTypeSelections: [],
   string: "",
   rebuildCount: 0,
   // clears the cached dynamic data
   initPassword: function () {
     this.string = "";
     this.typeUsed = "";
-    this.arrayTypeSelections = [];
-    this.ntypeTotal = 0;
     this.rebuildCount = 0;
   }
 }
 
 //* MAIN FUNCTION: Calls the smaller functions to construct the password;
 function constructPassword() {
-  console.log("[Event]Running constructPassword()");
+  console.log("[Event]\t\t\tRunning constructPassword()");
 
   // wipe object property values memory clean for creating a new password in case there are leftover data; should make a method
   passwordObject.initPassword();
@@ -47,34 +43,32 @@ function constructPassword() {
 }
 
 function promptUser() {
+  console.log("[Event]\t\t\tRunning promptUser()");
 
   //START:  Character prompt - Loop the prompt until expected input is received, then proceed with function
   var promptChar;
   while (true) {
-    console.log("[Prompt]Char: User Prompted");
     var promptChar = prompt("How many characters long?\n(Min 8, Max 128)");
-    console.log("[Prompt]Char: User input=" + promptChar);
 
     // If user input is blank or empty, reloop again until proper input
     if (promptChar == "") {
-      console.log("[Prompt]Char: User entered no input; relooping");
+      console.log("[promptUser()]\tUser entered no input; relooping");
       alert("No input was received.  Please try again.")
       continue;
     }
     // If user input is a number (true) & between 8-128
     else if (Number.isInteger(parseInt(promptChar)) && promptChar >= 8 && promptChar <= 128) {
       passwordObject.chars = promptChar //Update the password property with input
-      // console.log("[Prompt]Char: User Input accepted; proceeding");
       break; //proceed onward
     }
     // If canceled out; exit function b/c this is mandatory
     else if (!promptChar) {
-      console.log("[Prompt]Char: User canceled");
+      console.log("[promptUser()]\tUser canceled");
       alert("Canceling as requested...\nTo continue with the password generator process, please start over and enter a value.")
       return -1; // exit parent function
     }
     else {
-      console.log("[Prompt]Char: User input did not meet requested parameters");
+      console.log("[promptUser()]\tUser input did not meet requested parameters");
       alert("Input did not meet the password limitations.  Please try again.")
       continue;
     }
@@ -95,17 +89,15 @@ function promptUser() {
     }
     else {
       passwordObject.aTypes = [{ lower }, { upper }, { number }, { special }].filter(item => Object.values(item)[0]);
+      console.log("[promptUser()]\t" + "Chars=" + passwordObject.chars + " lower=" + lower + " upper=" + upper + " number=" + number + " special=" + special);
       break;
     }
   }
 }
 
-//Checkpoint
-console.log(passwordObject);
-
 //* go thru the password building process
 function buildPassword() {
-  console.log("[Event]Running buildPassword()");
+  console.log("[Event]\t\t\t\tRunning buildPassword()");
 
 
   // Assign array of type objects to a variable for easier use going forward
@@ -133,8 +125,7 @@ function buildPassword() {
     else if (k === "lower") {
       passwordObject.string += getLower();
     }
-    console.log("[charLoop]Character:#" + (i + 1) + " Type:" + k +
-      "\tCurrent string: " + passwordObject.string);
+    console.log("[buildPassword()]\t\tChar:#" + (i + 1) + "\tString:\t" + passwordObject.string);
   }
 
   // call type validator; if false, generate password again
@@ -158,44 +149,37 @@ function buildPassword() {
 //#region ====================> all sub-functions <====================
 // randomize thru arraySpec to get a special char
 function getSpecial() {
-  // console.log("[Event]Running getSpecial()");
   return passwordObject.arraySpecials[Math.floor((Math.random() * passwordObject.arraySpecials.length))];
 }
 // randomize number from char-chart
 function getNumber() {
-  // console.log("[Event]Running getNumber()");
   return String.fromCharCode(Math.floor((Math.random() * 10) + 48));
 }
 // randomize upper from char-chart
 function getUpper() {
-  // console.log("[Event]Running getUpper()");
   return String.fromCharCode(Math.floor((Math.random() * 26) + 65));
 }
-// randomize lower from char-chart
 function getLower() {
-  // console.log("[Event]Running getLower()");
   return String.fromCharCode(Math.floor((Math.random() * 26) + 97));
 }
 
-//validates if the password contains at least 1 of each type selected
+//Validates if the password contains at least 1 of each type selected; if not, build another random password
 function typeValidator() {
-  console.log("[Event]Running typeValidator()");
+  console.log("[Event]\t\t\t\tRunning typeValidator()");
 
   // loop thru types selected, check if they exist in types used, if not then recreate password until all are used
   for (let i = 0; i < passwordObject.aTypes.length; i++) {
     let j = Object.getOwnPropertyNames(passwordObject.aTypes[i])[0]
-    console.log("Does " + j + " exist in " + passwordObject.typeUsed);
-    // let j = passwordObject.typeUsed.indexOf(passwordObject.arrayTypeSelections[i])
 
     if (passwordObject.typeUsed.indexOf(j) === -1) {
-      console.log("[Alert]typeValidator(): Alert! Not all types were used, regenerating password!");
+      console.log("[typeValidator()]\tAlert! Not all types were used, regenerating password!");
       passwordObject.rebuildCount++;
       return -1;
     }
   }
 
-  console.log("[Alert]typeValidator(): Validation completed. All types used.");
+  // Return 0 if successfully validated
+  console.log("[typeValidator()]\tValidation completed. All types used.");
   return 0;
-
 }
 //#endregion ================================================================================
