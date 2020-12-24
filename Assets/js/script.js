@@ -18,11 +18,6 @@ function generatePassword() {
 //Password object to hold values during construction
 var passwordObject = {
   chars: 0,
-  lower: 0,
-  upper: 0,
-  number: 0,
-  special: 0,
-  typeSelected: "",
   typeUsed: "",
   arraySpecials: ["!", "\"", "#", "$", "%", "&", "'", "(", ")", "*", "+", "\,", "-", ".", "/", ":", ";", "<", "=", ">", "?", "@", "[", "\\", "]", "^", "_", "`", "{", "|", "}", "~"],
   arrayTypeSelections: [],
@@ -37,7 +32,6 @@ var passwordObject = {
     this.rebuildCount = 0;
   }
 }
-
 
 //* MAIN FUNCTION: Calls the smaller functions to construct the password;
 function constructPassword() {
@@ -86,7 +80,7 @@ function promptUser() {
     }
   }
 
-  // character prompts; stores true or false into variable
+  // character prompts; store true or false into object array as individual objects; if the results sum = 0, user did not select a type of character; reloop
   while (true) {
     let lower = confirm("Would you like to include any lower case characters?");
     let upper = confirm("Would you like to include any upper case characters?");
@@ -114,20 +108,15 @@ function buildPassword() {
   console.log("[Event]Running buildPassword()");
 
 
-  // random char type |  Object.array[of objects] > property > key
-  let z = passwordObject.aTypes // Assign array of objects to z for easier use going forward
-  
-  // main loop; loop total chars long, for each character slot -> random type -> random char -> random case style
+  // Assign array of type objects to a variable for easier use going forward
+  let z = passwordObject.aTypes
+
+  // main loop; loop total chars long, for each character slot -> random type -> random char
   for (let i = 0; i < passwordObject.chars; i++) {
 
-    console.log("ssssssssssssssssssssssssssssssssssssssssssssssssssssssssss");
-    let sType = Object.getOwnPropertyNames(passwordObject.aTypes[Math.floor((Math.random() * passwordObject.aTypes.length))])[0]
-    console.log("Current type selected randomly: "+  sType  )
-    if (passwordObject.typeUsed.indexOf(sType) === -1 ) { passwordObject.typeUsed += sType }
-    console.log("Current types used so far: "+  passwordObject.typeUsed);
-    console.log("eeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeeee");
-  
-    let k = Object.getOwnPropertyNames(passwordObject.aTypes[Math.floor((Math.random() * z.length))])[0]; // grab a random property name from the array of objects
+    // Randomly select a character type from the available types in the array
+    let k = Object.getOwnPropertyNames(z[Math.floor((Math.random() * z.length))])[0]; // grab a random property name from the array of objects
+
     // If the type does not exist in the typeused property; append the type to the property; later to be validated to ensure all types selected are used at least once
     if (passwordObject.typeUsed.indexOf(k) === -1) { passwordObject.typeUsed += k }
 
@@ -150,13 +139,12 @@ function buildPassword() {
 
   // call type validator; if false, generate password again
   let y = typeValidator();
-  console.log("VALIDATOR SAYS: " + y);
+  console.log("VALIDATOR SAYS: " + y + " with Rebuild=" + passwordObject.rebuildCount);
 
   // if all available types werent used then reset string; reset typeused; add 1 rebuild counter; buildPassword again
   if (y === -1) {
     passwordObject.string = "";
     passwordObject.typeUsed = "";
-    passwordObject.rebuildCount++;
     return buildPassword();
   }
   // return the final string
@@ -194,18 +182,20 @@ function typeValidator() {
   console.log("[Event]Running typeValidator()");
 
   // loop thru types selected, check if they exist in types used, if not then recreate password until all are used
-  for (let i = 0; i < passwordObject.arrayTypeSelections.length; i++) {
-    let j = passwordObject.typeUsed.indexOf(passwordObject.arrayTypeSelections[i])
+  for (let i = 0; i < passwordObject.aTypes.length; i++) {
+    let j = Object.getOwnPropertyNames(passwordObject.aTypes[i])[0]
+    console.log("Does " + j + " exist in " + passwordObject.typeUsed);
+    // let j = passwordObject.typeUsed.indexOf(passwordObject.arrayTypeSelections[i])
 
-    if (passwordObject.typeUsed.indexOf(passwordObject.arrayTypeSelections[i]) === -1) {
+    if (passwordObject.typeUsed.indexOf(j) === -1) {
       console.log("[Alert]typeValidator(): Alert! Not all types were used, regenerating password!");
+      passwordObject.rebuildCount++;
       return -1;
     }
-    // else return success
-    else {
-      console.log("[Alert]typeValidator(): Validation completed. All types used.");
-      return 0;
-    }
   }
+
+  console.log("[Alert]typeValidator(): Validation completed. All types used.");
+  return 0;
+
 }
 //#endregion ================================================================================
