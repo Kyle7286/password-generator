@@ -37,7 +37,15 @@
     * What to do?
 
 ### **function buildPassword()**
-* asdf
+* Loop thru total characters input
+* 
+
+
+
+
+
+---
+
 function constructPassword - Takes variables from capture and runs logic to create the password
     totalchars (for loop)
         charactertype (random 3)

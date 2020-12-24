@@ -38,6 +38,7 @@ var passwordObject = {
   }
 }
 
+
 //* MAIN FUNCTION: Calls the smaller functions to construct the password;
 function constructPassword() {
   console.log("[Event]Running constructPassword()");
@@ -85,6 +86,7 @@ function promptUser() {
     }
   }
 
+  // character prompts; stores true or false into variable
   var lower = confirm("Would you like to include any lower case characters?");
   var upper = confirm("Would you like to include any upper case characters?");
   var number = confirm("Would you like to include any numbers?");
@@ -105,12 +107,13 @@ function buildPassword() {
   // main loop; loop total chars long, for each character slot -> random type -> random char -> random case style
   for (let i = 0; i < passwordObject.chars; i++) {
 
-    // random char type
-    let k = passwordObject.arrayTypeSelections[Math.floor((Math.random() * passwordObject.arrayTypeSelections.length))];
-    // console.log("[charLoop]CharacterType:  " + k);
+    // random char type|  Object > array > object > property > key
+    let z = passwordObject.aTypes // Assign array of objects to z
+    let k = Object.getOwnPropertyNames(z[Math.floor((Math.random() * z.length))])[0]; // grab a random property name from the array of objects
 
     // If the type does not exist in the typeused property; append the type to the property; later to be validated to ensure all types selected are used at least once
     if (passwordObject.typeUsed.indexOf(k) === -1) { passwordObject.typeUsed += k }
+
 
     // Run character logic and return a character; append to string
     if (k === "number") {
