@@ -2,7 +2,7 @@
 
 ## General 📖
 ---
-- Date:           
+- Date:           12/24/2020
 - Author:         Brandon Haley
 - Email:          Kyle7286@gmail.com
 - Github:         https://github.com/Kyle7286/password-generator
