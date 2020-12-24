@@ -99,7 +99,6 @@ function promptUser() {
 function buildPassword() {
   console.log("[Event]\t\t\t\tRunning buildPassword()");
 
-
   // Assign array of type objects to a variable for easier use going forward
   let z = passwordObject.aTypes
 

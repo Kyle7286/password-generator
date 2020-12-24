@@ -8,6 +8,7 @@
         * Validate at least 1 selections was made
     3. Call Builder
         * Validate password
+            * Call Builder again failed validation
 
 ### **function constructer()**
 1. Run promptUser()
@@ -34,56 +35,22 @@
     * Optional
     * Confirm()
 * No selections
-    * What to do?
+    * Alert
+    * Loop again
+* Store all TRUE values only using array filter
 
 ### **function buildPassword()**
 * Loop thru total characters input
-* 
+    * Select random type
+        * Add type selected to a string for validation later; only add it if it doesnt already exist in the string
+        * Pull random character for the type selected via if statements
+            * getLower(), getUpper(), getNumber(), getSpecial()
+        * Append each character pull to a global string value
+        * Call validator()
 
-
-
-### **passwordObject**
-
-
-
-
----
-
-function constructPassword - Takes variables from capture and runs logic to create the password
-    totalchars (for loop)
-        charactertype (random 3)
-            numbers (random 0-9)
-            letters (random a-z)
-                upper (random 0/1)
-                lower (random 0/1)
-            special (random 32)
-
-
-CHARACTER INPUT (MANDATORY)
-    While (True) {
-        chars = parseINt(prompt())
-        if (isInteger(chars) && chars >= 8 && chars <= 128) {
-            set object.chars = chars
-            break; //proceed onward
-        }
-        else if (!chars) {
-            return;
-        }
-
-    }
-
-## String Building
-1. Loop for Char times
-
-
-## Validator
-    1. 
-
-
-                
-
-
-================================
-- 
-
-                
+### **function typeValidator()***
+* Loop for total char types
+    * Grab the char type string
+    * check to see if char type string exists in the types used string
+    * If so, return final string
+    * If not, run buildPassword() again

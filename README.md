@@ -18,11 +18,15 @@
 --- 
 * Learned the value of psuedo code to plan out the logic
 * Gained confidence in use of objects and the efficiency of dot notation
-* Learned out to escape special vs characters to see them as their actual character instead of a inherit function
+* Learned how to escape special VSCode characters to see them as their actual character instead of a inherit function
+* *WAS REALLY HARD* Figured out how to traverse an OBJECT that has an ARRAY of OBJECTS via Object.getOwnPropertyNames()
+* Learned the effectiveness of using true and false; which can be added together to sum to a number
+* Learned how to refactor my own code by researching other tactics for handling certain situations, then implementing/retrofitting the code accordingly
+* Learned that chartypes have a computer ALT code associated with them
 
 ## Screenshot 📊
 ---
-![Screenshot](...)
+![Screenshot](./Assets/images/Screenshot_index1.png)
 
 
 
@@ -30,5 +34,5 @@
 ---
     Thank you for your time reviewing my project/code!
     I offer you a relaxing scenery; enjoy.
-![Iceland](./Assets/images\east_fjords_Iceland.jpg)
+![Iceland](./Assets/images/east_fjords_Iceland.jpg)
 <span style="color:#a0c9f0">Eastern Fjords of Iceland</span>
