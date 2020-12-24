@@ -2,11 +2,11 @@
 
 ## General 📖
 ---
-- Date:           12/24/2020
-- Author:         Brandon Haley
-- Email:          Kyle7286@gmail.com
-- Github:         https://github.com/Kyle7286/password-generator
-- Website:        https://kyle7286.github.io/password-generator/
+- ***Date***:           12/24/2020
+- ***Author***:         Brandon Haley
+- ***Email***:          Kyle7286@gmail.com
+- ***Github***:         https://github.com/Kyle7286/password-generator
+- ***Website***:        https://kyle7286.github.io/password-generator/
 
 ## About/Purpose ❔
 ---
