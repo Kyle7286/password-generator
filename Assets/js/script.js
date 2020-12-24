@@ -87,14 +87,22 @@ function promptUser() {
   }
 
   // character prompts; stores true or false into variable
-  var lower = confirm("Would you like to include any lower case characters?");
-  var upper = confirm("Would you like to include any upper case characters?");
-  var number = confirm("Would you like to include any numbers?");
-  var special = confirm("Would you like to include any special characters?");
+  while (true) {
+    var lower = confirm("Would you like to include any lower case characters?");
+    var upper = confirm("Would you like to include any upper case characters?");
+    var number = confirm("Would you like to include any numbers?");
+    var special = confirm("Would you like to include any special characters?");
 
-  passwordObject.ntypeTotal = (passwordObject.lower + passwordObject.upper + passwordObject.special + passwordObject.number);
-  passwordObject.aTypes = [{ lower }, { upper }, { number }, { special }].filter(item => Object.values(item)[0]  );
-  
+    // total up the types selected; if still = 0, run prompts again
+    let k = passwordObject.typeCount = (lower + upper + number + special);
+    if (k === 0) {
+      alert("No selections were made. Please try again and make at least 1 selection.")
+      continue;
+    }
+    else {break;}
+  }
+
+  passwordObject.aTypes = [{ lower }, { upper }, { number }, { special }].filter(item => Object.values(item)[0]);
   console.log(passwordObject);
 
 }
@@ -113,7 +121,6 @@ function buildPassword() {
 
     // If the type does not exist in the typeused property; append the type to the property; later to be validated to ensure all types selected are used at least once
     if (passwordObject.typeUsed.indexOf(k) === -1) { passwordObject.typeUsed += k }
-
 
     // Run character logic and return a character; append to string
     if (k === "number") {
