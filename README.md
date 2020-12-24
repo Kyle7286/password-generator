@@ -10,8 +10,7 @@
 
 ## About/Purpose ❔
 ---
-
-    The purpose of this webpage is to utilize javascript and create a password generator which accepts a specific set of criteria from the user and outputs a random password containing at least one of each type selected.
+The purpose of this webpage is to utilize javascript and create a password generator which accepts a specific set of criteria from the user and outputs a random password containing at least one of each type selected.
 
 
 ## Takeaways 🥡
