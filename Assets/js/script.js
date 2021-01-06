@@ -37,6 +37,8 @@ function constructPassword() {
   passwordObject.initPassword();
 
   let i = promptUser();
+  // if user canceled, exit function
+  if (i = -1) { return -1}
   let j = buildPassword();
   console.log("CONSTRUCT PASSWORD RETURNING: " + j);
   return j
