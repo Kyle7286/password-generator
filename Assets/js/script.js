@@ -36,12 +36,16 @@ function constructPassword() {
   // wipe object property values memory clean for creating a new password in case there are leftover data; should make a method
   passwordObject.initPassword();
 
+  // prompt user and store results
   let i = promptUser();
-  // if user canceled, exit function
+
+  // if user canceled, exit function via return;
   if (i === -1) { return -1}
+
+  // build the password
   let j = buildPassword();
   console.log("CONSTRUCT PASSWORD RETURNING: " + j);
-  return j
+  return j;
 }
 
 function promptUser() {
