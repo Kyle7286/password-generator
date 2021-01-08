@@ -71,7 +71,7 @@ function promptUser() {
     else if (!promptChar) {
       console.log("[promptUser()]\tUser canceled");
       alert("Canceling as requested...\nTo continue with the password generator process, please start over and enter a value.")
-      return -1; // exit parent function
+      return -1; // exit function
     }
     else {
       console.log("[promptUser()]\tUser input did not meet requested parameters");
