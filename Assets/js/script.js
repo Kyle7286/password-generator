@@ -40,7 +40,7 @@ function constructPassword() {
   let i = promptUser();
 
   // if user canceled, exit function via return;
-  if (i === -1) { return -1}
+  if (i === -1) { return "" }
 
   // build the password
   let j = buildPassword();
@@ -71,7 +71,7 @@ function promptUser() {
     else if (!promptChar) {
       console.log("[promptUser()]\tUser canceled");
       alert("Canceling as requested...\nTo continue with the password generator process, please start over and enter a value.")
-      return; // exit parent function
+      return -1; // exit parent function
     }
     else {
       console.log("[promptUser()]\tUser input did not meet requested parameters");
